@@ -1,6 +1,13 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
+import { Suspense } from "react";
+import StoreProvider from "./StoreProvider";
 import "./globals.css";
+
+// Components
+import Header from "@/components/Header/Header";
+// import Footer from "@/components/Footer/Footer";
+import Loading from "@/app/loading";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -15,8 +22,16 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className={inter.className}>{children}</body>
-    </html>
+    <StoreProvider>
+      <html lang="en">
+        <body className={inter.className}>
+          <Suspense fallback={<Loading />}>
+            <Header />
+            {children}
+          </Suspense>
+        </body>
+      </html>
+    </StoreProvider>
+
   );
 }
