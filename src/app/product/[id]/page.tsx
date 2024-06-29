@@ -11,7 +11,7 @@ const Page = async ({ params }: any) => {
 }
 
 async function getSingleProduct(id: number) {
-    const res: any = await fetch(`https://fakestoreapi.com/products/${id}`)
+    const res: any = await fetch(`${process.env.API_URL}/products/${id}`)
     if (!res?.ok) {
         throw new Error('Failed to fetch data')
     }
